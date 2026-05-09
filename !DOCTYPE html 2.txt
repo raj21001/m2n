@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nepal Seva Foundation — Making a Difference for Nepal and Nepalese</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --crimson:     #B51C2E;
+      --crimson-dk:  #8A1320;
+      --gold:        #E8A020;
+      --gold-lt:     #F5C45A;
+      --sky:         #1C3F72;
+      --sky-lt:      #2D5FAA;
+      --earth:       #3D2414;
+      --terra:       #C4663A;
+      --cream:       #FEF6EC;
+      --warm-white:  #FFFAF4;
+      --muted:       #7A6553;
+      --border:      rgba(61,36,20,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--earth);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--crimson); border-radius: 3px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+      background: rgba(254,246,236,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-emblem {
+      width: 42px; height: 42px;
+      background: var(--crimson);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(181,28,46,0.35);
+    }
+    .nav-logo-text { line-height: 1.1; }
+    .nav-logo-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--crimson);
+      display: block;
+    }
+    .nav-logo-sub {
+      font-size: 10px; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      text-decoration: none; color: var(--earth);
+      font-size: 14px; font-weight: 500; letter-spacing: .02em;
+      position: relative; padding-bottom: 2px;
+      transition: color .25s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--crimson);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .nav-links a:hover { color: var(--crimson); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .btn-nav {
+      background: var(--crimson); color: #fff !important;
+      padding: 9px 22px; border-radius: 6px;
+      font-size: 13px !important; font-weight: 600 !important;
+      letter-spacing: .04em;
+      transition: background .25s, transform .2s !important;
+      box-shadow: 0 3px 14px rgba(181,28,46,0.3);
+    }
+    .btn-nav::after { display: none !important; }
+    .btn-nav:hover { background: var(--crimson-dk) !important; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--earth); border-radius: 2px;
+      transition: all .3s;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(170deg, #0d1f3c 0%, #1C3F72 45%, #3d1520 100%);
+      padding: 100px 5% 60px;
+      text-align: center;
+    }
+
+    /* Stars */
+    .stars {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 22%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 60% 10%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 18%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 5%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 50% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 32% 42%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 48%, rgba(255,255,255,0.3) 0%, transparent 100%);
+    }
+
+    /* Mountains SVG */
+    .mountains {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      width: 100%; height: auto;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,160,32,0.18);
+      border: 1px solid rgba(232,160,32,0.4);
+      color: var(--gold-lt);
+      font-size: 11px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 7px 18px; border-radius: 50px;
+      margin-bottom: 28px;
+      animation: fadeSlideDown .7s ease both;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--gold);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:.5; transform:scale(1.4); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 7vw, 90px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.05;
+      max-width: 880px;
+      margin: 0 auto 14px;
+      animation: fadeSlideDown .8s ease .1s both;
+    }
+    .hero h1 span { color: var(--gold); font-style: italic; }
+
+    .hero-motto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-style: italic; font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 42px;
+      animation: fadeSlideDown .8s ease .2s both;
+    }
+
+    .hero-ctas {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      animation: fadeSlideDown .8s ease .35s both;
+      position: relative; z-index: 2;
+    }
+    .btn-primary {
+      background: var(--crimson);
+      color: #fff; border: none; cursor: pointer;
+      padding: 15px 34px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      letter-spacing: .03em;
+      transition: all .25s;
+      box-shadow: 0 4px 24px rgba(181,28,46,0.45);
+    }
+    .btn-primary:hover {
+      background: var(--crimson-dk);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(181,28,46,0.55);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #fff; border: 2px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      padding: 13px 32px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      letter-spacing: .03em;
+      transition: all .25s;
+    }
+    .btn-outline:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 220px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.4);
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      animation: fadeSlideDown .8s ease .6s both;
+    }
+    .scroll-hint-arrow {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+      animation: dropLine 1.6s ease-in-out infinite;
+    }
+    @keyframes dropLine {
+      0%,100% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── STATS STRIP ─── */
+    .stats-strip {
+      background: var(--crimson);
+      padding: 40px 5%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center; padding: 0 20px;
+      border-right: 1px solid rgba(255,255,255,0.18);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 700; color: #fff;
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: 12px; font-weight: 500; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.7);
+      margin-top: 4px; display: block;
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 100px 5%; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--crimson);
+      margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 24px; height: 2px; background: var(--crimson);
+    }
+
+    h2.section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 4.5vw, 58px);
+      font-weight: 700; line-height: 1.1;
+      color: var(--earth);
+      margin-bottom: 20px;
+    }
+    h2.section-title em { font-style: italic; color: var(--crimson); }
+
+    .section-desc {
+      font-size: 16px; line-height: 1.75;
+      color: var(--muted); max-width: 600px;
+    }
+
+    /* ─── MISSION ─── */
+    .mission {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+
+    .mission-visual {
+      position: relative;
+    }
+    .mission-card {
+      background: var(--sky);
+      border-radius: 20px;
+      padding: 50px 40px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-card::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .mission-card::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -30px;
+      width: 160px; height: 160px;
+      background: rgba(232,160,32,0.08);
+      border-radius: 50%;
+    }
+    .mission-card-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 68px; line-height: .8;
+      color: var(--gold);
+      margin-bottom: 20px; display: block;
+    }
+    .mission-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; line-height: 1.55;
+      font-style: italic; color: rgba(255,255,255,0.9);
+      position: relative; z-index: 1;
+    }
+    .mission-card-author {
+      margin-top: 24px;
+      font-size: 13px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gold-lt);
+      position: relative; z-index: 1; display: block;
+    }
+
+    .mission-float-badge {
+      position: absolute; bottom: -20px; right: 30px;
+      background: var(--gold);
+      border-radius: 14px;
+      padding: 18px 22px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+    }
+    .mission-float-badge strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 700;
+      color: var(--earth); line-height: 1;
+    }
+    .mission-float-badge span {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--earth); opacity: .7;
+    }
+
+    .mission-values {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 40px;
+    }
+    .value-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .value-item:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+    }
+    .value-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .value-item h4 {
+      font-size: 14px; font-weight: 600; margin-bottom: 4px;
+      color: var(--earth);
+    }
+    .value-item p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ─── PROJECTS ─── */
+    .projects { background: var(--warm-white); }
+    .projects-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 20px;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .project-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: all .3s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+    .project-thumb {
+      height: 200px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .project-thumb-icon {
+      font-size: 56px; position: relative; z-index: 1;
+    }
+    .project-thumb-overlay {
+      position: absolute; inset: 0;
+      opacity: .15;
+    }
+    .project-tag {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--crimson);
+    }
+    .project-body { padding: 26px; }
+    .project-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 700; margin-bottom: 10px;
+      color: var(--earth);
+    }
+    .project-body p {
+      font-size: 14px; line-height: 1.65; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .project-progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 12px; font-weight: 600; color: var(--earth);
+      margin-bottom: 8px;
+    }
+    .project-progress-bar {
+      height: 6px; background: #f0e8e0; border-radius: 3px; overflow: hidden;
+    }
+    .project-progress-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold));
+      transition: width 1s ease;
+    }
+    .project-footer {
+      padding: 16px 26px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .project-beneficiaries {
+      font-size: 12px; color: var(--muted);
+    }
+    .project-beneficiaries strong { color: var(--earth); font-weight: 600; }
+    .project-link {
+      font-size: 13px; font-weight: 600; color: var(--crimson);
+      text-decoration: none; letter-spacing: .03em;
+      display: flex; align-items: center; gap: 6px;
+      transition: gap .2s;
+    }
+    .project-link:hover { gap: 10px; }
+
+    /* ─── GET INVOLVED ─── */
+    .involved {
+      background: var(--sky);
+      position: relative; overflow: hidden;
+    }
+    .involved::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: rgba(232,160,32,0.06);
+      border-radius: 50%;
+    }
+    .involved::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -80px;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+
+    .involved .section-label { color: var(--gold-lt); }
+    .involved .section-label::before { background: var(--gold-lt); }
+    .involved h2.section-title { color: #fff; }
+    .involved .section-desc { color: rgba(255,255,255,0.65); max-width: 560px; }
+
+    .involved-header { margin-bottom: 60px; }
+
+    .involved-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      position: relative; z-index: 1;
+    }
+    .involved-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 36px 30px;
+      transition: all .3s;
+      position: relative; overflow: hidden;
+    }
+    .involved-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(232,160,32,0); border-radius: inherit;
+      transition: background .3s;
+    }
+    .involved-card:hover::before { background: rgba(232,160,32,0.04); }
+    .involved-card:hover {
+      border-color: rgba(232,160,32,0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+    }
+    .involved-icon {
+      width: 56px; height: 56px;
+      background: rgba(232,160,32,0.15);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 22px;
+    }
+    .involved-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 700;
+      color: #fff; margin-bottom: 12px;
+    }
+    .involved-card p {
+      font-size: 14px; line-height: 1.65;
+      color: rgba(255,255,255,0.6); margin-bottom: 28px;
+    }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold);
+      color: var(--earth); padding: 11px 22px; border-radius: 8px;
+      font-size: 13px; font-weight: 700; letter-spacing: .04em;
+      text-decoration: none;
+      transition: all .25s;
+    }
+    .btn-gold:hover {
+      background: var(--gold-lt);
+      transform: translateX(3px);
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      background: var(--cream);
+    }
+    .testimonials-header { text-align: center; margin-bottom: 60px; }
+    .testimonials-header .section-label { justify-content: center; }
+    .testimonials-header .section-label::before { display: none; }
+    .testimonials-header .section-label::after {
+      content: ''; display: block;
+      width: 24px; height: 2px; background: var(--crimson);
+    }
+
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .testimonial-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px; line-height: .7;
+      color: var(--crimson); opacity: .15;
+      position: absolute; top: 20px; left: 24px;
+      pointer-events: none;
+    }
+    .testimonial-stars {
+      color: var(--gold); font-size: 14px; margin-bottom: 14px;
+      letter-spacing: 2px;
+    }
+    .testimonial-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; line-height: 1.6; font-style: italic;
+      color: var(--earth); margin-bottom: 24px;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-size: 14px; font-weight: 600; color: var(--earth);
+      display: block;
+    }
+    .testimonial-role {
+      font-size: 12px; color: var(--muted);
+    }
+
+    /* ─── DONATE ─── */
+    .donate {
+      background: linear-gradient(135deg, var(--crimson-dk) 0%, var(--crimson) 50%, #8B1A40 100%);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .donate::before {
+      content: 'नेपाल';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 220px; font-weight: 700;
+      color: rgba(255,255,255,0.04);
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .donate .section-label { color: var(--gold-lt); justify-content: center; }
+    .donate .section-label::before { display:none; }
+    .donate .section-label::after {
+      content: ''; display: block; width: 24px; height: 2px; background: var(--gold-lt);
+    }
+    .donate h2.section-title { color: #fff; }
+    .donate .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto 40px; }
+    .donate-amounts {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .donate-amount-btn {
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.25);
+      color: #fff; cursor: pointer;
+      padding: 12px 24px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px; font-weight: 600;
+      transition: all .2s;
+    }
+    .donate-amount-btn:hover,
+    .donate-amount-btn.active {
+      background: var(--gold); border-color: var(--gold);
+      color: var(--earth);
+    }
+    .donate-cta { margin-top: 8px; }
+
+    /* ─── LOCATION ─── */
+    .location {
+      background: var(--warm-white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .location-info { order: 1; }
+    .location-map-wrap { order: 2; }
+    .location-map-wrap iframe {
+      width: 100%; height: 420px;
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+    .contact-items { margin-top: 36px; display: flex; flex-direction: column; gap: 18px; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px; background: var(--cream);
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    .contact-item-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--crimson);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0; color: #fff;
+    }
+    .contact-item h4 { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 2px; }
+    .contact-item p { font-size: 15px; color: var(--earth); font-weight: 500; }
+    .contact-item a { color: var(--crimson); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter {
+      background: var(--earth);
+      padding: 60px 5%;
+      text-align: center;
+    }
+    .newsletter h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 700; color: #fff;
+      margin-bottom: 8px;
+    }
+    .newsletter p { color: rgba(255,255,255,0.6); font-size: 15px; margin-bottom: 28px; }
+    .newsletter-form {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      max-width: 480px; margin: 0 auto;
+    }
+    .newsletter-form input {
+      flex: 1; min-width: 220px;
+      padding: 14px 20px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
+      color: #fff; font-family: 'DM Sans', sans-serif; font-size: 14px;
+      outline: none; transition: border .25s;
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .newsletter-form input:focus { border-color: var(--gold); }
+    .newsletter-form button {
+      background: var(--crimson); color: #fff; border: none; cursor: pointer;
+      padding: 14px 28px; border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+      transition: all .25s;
+    }
+    .newsletter-form button:hover { background: var(--crimson-dk); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1a0e07;
+      color: rgba(255,255,255,0.55);
+      padding: 60px 5% 32px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 700;
+      color: #fff; margin-bottom: 6px;
+    }
+    .footer-brand-sub {
+      font-size: 12px; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 16px; display: block;
+    }
+    .footer-brand-desc {
+      font-size: 13px; line-height: 1.7;
+      color: rgba(255,255,255,0.45); max-width: 260px;
+    }
+    .footer-socials {
+      display: flex; gap: 10px; margin-top: 22px;
+    }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: all .25s;
+    }
+    .social-btn:hover {
+      background: var(--crimson);
+      border-color: var(--crimson);
+      color: #fff;
+    }
+    .footer-col h4 {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #fff; margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-bottom span { color: var(--crimson); }
+    .nepal-flag-strip {
+      display: flex; gap: 4px; align-items: center;
+    }
+    .flag-c { width: 16px; height: 6px; border-radius: 2px; }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .involved-cards { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+        position: fixed; top: 70px; left: 0; right: 0;
+        background: var(--cream);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 5%;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        z-index: 999;
+      }
+      .nav-links.open a {
+        width: 100%; padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 16px;
+      }
+      .nav-links.open a:last-child { border-bottom: none; }
+      .btn-nav {
+        display: block; text-align: center;
+        margin-top: 8px; padding: 12px 22px !important;
+      }
+      .hamburger { display: flex; }
+
+      .stats-strip { grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.15); }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); background: var(--crimson); }
+      .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.18); }
+
+      .mission { grid-template-columns: 1fr; gap: 40px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .involved-cards { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .location { grid-template-columns: 1fr; gap: 40px; }
+      .location-info { order: 2; }
+      .location-map-wrap { order: 1; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .projects-header { flex-direction: column; align-items: flex-start; }
+      section { padding: 70px 4%; }
+      .mission-values { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-outline { width: 100%; max-width: 300px; text-align: center; }
+      .donate-amounts { flex-direction: column; align-items: center; }
+      .donate-amount-btn { width: 200px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-emblem">NSF</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-title">Nepal Seva Foundation</span>
+      <span class="nav-logo-sub">Nonprofit Organization</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#mission">Our Mission</a>
+    <a href="#projects">Projects</a>
+    <a href="#involved">Get Involved</a>
+    <a href="#location">Contact</a>
+    <a href="#donate" class="btn-nav">Donate Now</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+  <div class="stars"></div>
+
+  <div class="hero-badge">🇳🇵 Serving Nepal Since 2010</div>
+
+  <h1>Empowering <span>Nepal,</span><br>One Life at a Time</h1>
+  <p class="hero-motto">"Making a Difference for Nepal and Nepalese"</p>
+
+  <div class="hero-ctas">
+    <a href="#projects" class="btn-primary">See Our Work</a>
+    <a href="#donate" class="btn-outline">Support Us</a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-hint-arrow"></div>
+  </div>
+
+  <!-- SVG Mountains -->
+  <svg class="mountains" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="mtnGrad1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#e8e8e8" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0.04"/>
+      </linearGradient>
+      <linearGradient id="mtnGrad2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.05"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+      </linearGradient>
+      <linearGradient id="mtnGrad3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E8A020" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#E8A020" stop-opacity="0.04"/>
+      </linearGradient>
+    </defs>
+    <!-- Far mountains -->
+    <polygon points="0,320 0,200 80,160 180,220 280,120 380,180 480,80 560,140 640,60 720,130 800,90 900,150 1000,70 1100,130 1200,85 1300,150 1440,100 1440,320" fill="url(#mtnGrad1)"/>
+    <!-- Mid mountains -->
+    <polygon points="0,320 0,240 100,200 200,250 300,170 400,220 520,140 640,200 760,150 880,210 1000,160 1120,230 1240,170 1360,220 1440,180 1440,320" fill="url(#mtnGrad2)"/>
+    <!-- Snow peaks highlight -->
+    <polygon points="480,80 520,95 560,140 440,140" fill="rgba(255,255,255,0.12)"/>
+    <polygon points="640,60 670,78 720,130 610,130" fill="rgba(255,255,255,0.15)"/>
+    <polygon points="800,90 840,108 880,150 760,150" fill="rgba(255,255,255,0.1)"/>
+    <!-- Front hills -->
+    <polygon points="0,320 0,280 150,250 350,280 500,240 700,270 900,240 1100,265 1300,240 1440,260 1440,320" fill="url(#mtnGrad3)"/>
+  </svg>
+</section>
+
+<!-- ─── STATS STRIP ─── -->
+<div class="stats-strip">
+  <div class="stat-item fade-in">
+    <span class="stat-num" data-target="12000">0</span>
+    <span class="stat-label">Lives Impacted</span>
+  </div>
+  <div class="stat-item fade-in">
+    <span class="stat-num" data-target="47">0</span>
+    <span class="stat-label">Active Projects</span>
+  </div>
+  <div class="stat-item fade-in">
+    <span class="stat-num" data-target="28">0</span>
+    <span class="stat-label">Districts Reached</span>
+  </div>
+  <div class="stat-item fade-in">
+    <span class="stat-num" data-target="15">0</span>
+    <span class="stat-label">Years of Service</span>
+  </div>
+</div>
+
+<!-- ─── MISSION ─── -->
+<section class="mission" id="mission">
+  <div class="mission-visual fade-in">
+    <div class="mission-card">
+      <span class="mission-card-quote">"</span>
+      <p>Every child deserves education, every family deserves dignity, and every community deserves the chance to flourish. We work tirelessly so Nepal can rise.</p>
+      <span class="mission-card-author">— Foundation Principles</span>
+    </div>
+    <div class="mission-float-badge">
+      <strong>100%</strong>
+      <span>Transparent</span>
+    </div>
+  </div>
+
+  <div class="mission-content fade-in">
+    <span class="section-label">Our Mission</span>
+    <h2 class="section-title">Rooted in <em>Seva</em>,<br>Built on Service</h2>
+    <p class="section-desc">Nepal Seva Foundation is a nonprofit dedicated to lifting communities across Nepal through education, healthcare, disaster relief, and sustainable development. We believe in the power of collective action.</p>
+
+    <div class="mission-values">
+      <div class="value-item">
+        <div class="value-icon" style="background:#FEF0F0;">🎓</div>
+        <div>
+          <h4>Education First</h4>
+          <p>Scholarships, schools & training for all ages.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon" style="background:#F0F8FF;">🏥</div>
+        <div>
+          <h4>Healthcare Access</h4>
+          <p>Free clinics and mobile health camps.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon" style="background:#FFF8E8;">🌱</div>
+        <div>
+          <h4>Sustainability</h4>
+          <p>Eco-friendly development that lasts generations.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon" style="background:#F0FFF4;">🤝</div>
+        <div>
+          <h4>Community Power</h4>
+          <p>Local leaders driving local solutions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section class="projects" id="projects">
+  <div class="projects-header">
+    <div>
+      <span class="section-label">Our Work</span>
+      <h2 class="section-title">Transforming <em>Lives</em><br>Across Nepal</h2>
+    </div>
+    <p class="section-desc" style="max-width:320px;">From mountain villages to urban centers, our projects create lasting change.</p>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="project-thumb" style="background: linear-gradient(135deg, #1a4a8a, #2d6ecf);">
+        <div class="project-thumb-overlay" style="background: radial-gradient(circle, #4a90d9, #0d2a6a);"></div>
+        <span class="project-thumb-icon">📚</span>
+        <span class="project-tag">Education</span>
+      </div>
+      <div class="project-body">
+        <h3>Mountain School Initiative</h3>
+        <p>Building and renovating schools in remote Himalayan communities, providing quality education to children who previously had to walk hours to learn.</p>
+        <div class="project-progress-label">
+          <span>Progress</span><span>78%</span>
+        </div>
+        <div class="project-progress-bar">
+          <div class="project-progress-fill" style="width:78%;"></div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-beneficiaries"><strong>3,200+</strong> students</span>
+        <a href="#" class="project-link">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-thumb" style="background: linear-gradient(135deg, #1e6b3a, #2d9e58);">
+        <div class="project-thumb-overlay" style="background: radial-gradient(circle, #4ec880, #0e3d20);"></div>
+        <span class="project-thumb-icon">🌿</span>
+        <span class="project-tag">Environment</span>
+      </div>
+      <div class="project-body">
+        <h3>Green Nepal Reforestation</h3>
+        <p>Planting native trees across deforested hillsides, restoring ecosystems and providing livelihoods for local farmers through sustainable agroforestry.</p>
+        <div class="project-progress-label">
+          <span>Progress</span><span>62%</span>
+        </div>
+        <div class="project-progress-bar">
+          <div class="project-progress-fill" style="width:62%;"></div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-beneficiaries"><strong>50K+</strong> trees planted</span>
+        <a href="#" class="project-link">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-thumb" style="background: linear-gradient(135deg, #7b2d8b, #b84fc8);">
+        <div class="project-thumb-overlay" style="background: radial-gradient(circle, #d080e8, #4a0d5e);"></div>
+        <span class="project-thumb-icon">🏥</span>
+        <span class="project-tag">Healthcare</span>
+      </div>
+      <div class="project-body">
+        <h3>Rural Health Camp Network</h3>
+        <p>Mobile clinics bringing doctors, medicine, and preventive care to villages where the nearest hospital is days away, serving thousands annually.</p>
+        <div class="project-progress-label">
+          <span>Progress</span><span>91%</span>
+        </div>
+        <div class="project-progress-bar">
+          <div class="project-progress-fill" style="width:91%;"></div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-beneficiaries"><strong>8,400+</strong> patients</span>
+        <a href="#" class="project-link">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-thumb" style="background: linear-gradient(135deg, #8a4a0d, #c8782a);">
+        <div class="project-thumb-overlay" style="background: radial-gradient(circle, #e8a050, #5a2800);"></div>
+        <span class="project-thumb-icon">🏠</span>
+        <span class="project-tag">Disaster Relief</span>
+      </div>
+      <div class="project-body">
+        <h3>Earthquake Rebuild Program</h3>
+        <p>Constructing earthquake-resistant homes for families still displaced, incorporating traditional Newari architectural elements with modern safety standards.</p>
+        <div class="project-progress-label">
+          <span>Progress</span><span>55%</span>
+        </div>
+        <div class="project-progress-bar">
+          <div class="project-progress-fill" style="width:55%;"></div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-beneficiaries"><strong>640</strong> families</span>
+        <a href="#" class="project-link">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-thumb" style="background: linear-gradient(135deg, #0d6b6b, #1aacac);">
+        <div class="project-thumb-overlay" style="background: radial-gradient(circle, #40d4d4, #053838);"></div>
+        <span class="project-thumb-icon">💧</span>
+        <span class="project-tag">Clean Water</span>
+      </div>
+      <div class="project-body">
+        <h3>Clean Water for All</h3>
+        <p>Installing community water systems and sanitation facilities in rural areas, dramatically reducing water-borne diseases and improving daily life.</p>
+        <div class="project-progress-label">
+          <span>Progress</span><span>84%</span>
+        </div>
+        <div class="project-progress-bar">
+          <div class="project-progress-fill" style="width:84%;"></div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-beneficiaries"><strong>15K+</strong> households</span>
+        <a href="#" class="project-link">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-thumb" style="background: linear-gradient(135deg, #6b1a3a, #c42e6a);">
+        <div class="project-thumb-overlay" style="background: radial-gradient(circle, #e060a0, #3d0818);"></div>
+        <span class="project-thumb-icon">👩</span>
+        <span class="project-tag">Women Empowerment</span>
+      </div>
+      <div class="project-body">
+        <h3>Shakti Women's Cooperative</h3>
+        <p>Vocational training, microloans, and mentorship for women entrepreneurs across Nepal, building economic independence and community leadership.</p>
+        <div class="project-progress-label">
+          <span>Progress</span><span>70%</span>
+        </div>
+        <div class="project-progress-bar">
+          <div class="project-progress-fill" style="width:70%;"></div>
+        </div>
+      </div>
+      <div class="project-footer">
+        <span class="project-beneficiaries"><strong>1,800+</strong> women</span>
+        <a href="#" class="project-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GET INVOLVED ─── -->
+<section class="involved" id="involved">
+  <div class="involved-header fade-in">
+    <span class="section-label">Join Us</span>
+    <h2 class="section-title">Be the Change<br><em style="color:var(--gold-lt);">Nepal Needs</em></h2>
+    <p class="section-desc">Whether you give, volunteer, or spread the word — every act of seva (service) creates ripples that transform communities.</p>
+  </div>
+
+  <div class="involved-cards">
+    <div class="involved-card fade-in">
+      <div class="involved-icon">💝</div>
+      <h3>Donate</h3>
+      <p>Your contribution directly funds schools, clinics, and homes. Every dollar is tracked, reported, and makes a real difference in someone's life.</p>
+      <a href="#donate" class="btn-gold">Give Today →</a>
+    </div>
+    <div class="involved-card fade-in">
+      <div class="involved-icon">🙋</div>
+      <h3>Volunteer</h3>
+      <p>Join our teams in Nepal or support remotely. We welcome doctors, teachers, engineers, and passionate individuals from all walks of life.</p>
+      <a href="mailto:volunteer@nepalseva.org" class="btn-gold">Apply Now →</a>
+    </div>
+    <div class="involved-card fade-in">
+      <div class="involved-icon">📢</div>
+      <h3>Spread the Word</h3>
+      <p>Share our mission on social media, host a fundraiser, or partner with us as an organization. Awareness is the first step to change.</p>
+      <a href="#" class="btn-gold">Partner With Us →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header fade-in">
+    <span class="section-label">Voices of Change</span>
+    <h2 class="section-title">Stories That <em>Matter</em></h2>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>Thanks to the Mountain School Initiative, my daughter can now study in a proper classroom instead of a leaky shed. She wants to become a doctor.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:#FEF0F0;">👩‍🌾</div>
+        <div>
+          <span class="testimonial-name">Sita Tamang</span>
+          <span class="testimonial-role">Mother, Sindhupalchok District</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>The health camp came to our village when my father had chest pains. The doctors treated him on the spot. We could never have afforded to go to Kathmandu.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:#F0F8FF;">👨‍🌾</div>
+        <div>
+          <span class="testimonial-name">Prakash Gurung</span>
+          <span class="testimonial-role">Farmer, Mustang District</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>The Shakti cooperative gave me a microloan and training. I now run my own weaving business and employ four other women from my community.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar" style="background:#FFF8E8;">👩‍💼</div>
+        <div>
+          <span class="testimonial-name">Maya Shrestha</span>
+          <span class="testimonial-role">Entrepreneur, Bhaktapur</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DONATE ─── -->
+<section class="donate" id="donate">
+  <span class="section-label">Support Our Cause</span>
+  <h2 class="section-title" style="color:#fff; margin:0 auto 16px;">Your Gift Changes <em style="color:var(--gold-lt);">Everything</em></h2>
+  <p class="section-desc">Choose a monthly giving amount and become a sustaining partner in Nepal's transformation.</p>
+  <div class="donate-amounts">
+    <button class="donate-amount-btn" onclick="setAmount(this)">$10/mo</button>
+    <button class="donate-amount-btn active" onclick="setAmount(this)">$25/mo</button>
+    <button class="donate-amount-btn" onclick="setAmount(this)">$50/mo</button>
+    <button class="donate-amount-btn" onclick="setAmount(this)">$100/mo</button>
+    <button class="donate-amount-btn" onclick="setAmount(this)">Custom</button>
+  </div>
+  <div class="donate-cta">
+    <a href="mailto:donate@nepalseva.org" class="btn-primary" style="display:inline-block; font-size:16px; padding:16px 44px;">
+      Donate Securely Now
+    </a>
+  </div>
+  <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:18px; letter-spacing:.04em;">
+    🔒 Secure &nbsp;|&nbsp; Tax-deductible &nbsp;|&nbsp; 100% goes to programs
+  </p>
+</section>
+
+<!-- ─── LOCATION ─── -->
+<section class="location" id="location">
+  <div class="location-info fade-in">
+    <span class="section-label">Find Us</span>
+    <h2 class="section-title">Visit Our <em>Office</em></h2>
+    <p class="section-desc">Our headquarters is open to volunteers, donors, and partners. Come meet the team working every day to make Nepal a better place.</p>
+
+    <div class="contact-items">
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <h4>Address</h4>
+          <p>Kathmandu, Nepal</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📧</div>
+        <div>
+          <h4>Email</h4>
+          <p><a href="mailto:info@nepalseva.org">info@nepalseva.org</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <h4>Phone</h4>
+          <p><a href="tel:+97714000000">+977 1-400-0000</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🕐</div>
+        <div>
+          <h4>Office Hours</h4>
+          <p>Sunday–Friday, 9:00 AM – 5:00 PM (NPT)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="location-map-wrap fade-in">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.9!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDQzJzAyLjAiTiA4NcKwMTknMjUuMiJF!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp&q=Nepal+Nonprofit+Kathmandu"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Nepal Seva Foundation Location">
+    </iframe>
+    <p style="text-align:center; margin-top:14px; font-size:13px; color:var(--muted);">
+      📍 <a href="https://maps.app.goo.gl/JaVqN2RqNHFuLVas8" target="_blank" rel="noopener" style="color:var(--crimson); text-decoration:none; font-weight:600;">Open full map →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ─── NEWSLETTER ─── -->
+<div class="newsletter">
+  <h3>Stay Connected to Nepal</h3>
+  <p>Receive project updates, stories of impact, and ways to help — straight to your inbox.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address" />
+    <button onclick="subscribeNewsletter(this)">Subscribe</button>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-text">Nepal Seva Foundation</div>
+      <span class="footer-brand-sub">Making a Difference for Nepal and Nepalese</span>
+      <p class="footer-brand-desc">A nonprofit organization committed to uplifting communities across Nepal through education, healthcare, sustainability, and empowerment.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" aria-label="Facebook">📘</a>
+        <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
+        <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+        <a href="#" class="social-btn" aria-label="YouTube">▶️</a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">💼</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Organization</h4>
+      <ul>
+        <li><a href="#mission">Our Mission</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#involved">Get Involved</a></li>
+        <li><a href="#">Annual Reports</a></li>
+        <li><a href="#">Our Team</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="#">Education</a></li>
+        <li><a href="#">Healthcare</a></li>
+        <li><a href="#">Clean Water</a></li>
+        <li><a href="#">Disaster Relief</a></li>
+        <li><a href="#">Women's Empowerment</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#donate">Donate</a></li>
+        <li><a href="#">Volunteer</a></li>
+        <li><a href="#">Corporate Partners</a></li>
+        <li><a href="#">Legacy Giving</a></li>
+        <li><a href="#location">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Nepal Seva Foundation. All rights reserved. Made with <span>♥</span> for Nepal.</p>
+    <div class="nepal-flag-strip" title="Flag of Nepal">
+      <div class="flag-c" style="background:#B51C2E;"></div>
+      <div class="flag-c" style="background:#003893; width:10px;"></div>
+    </div>
+    <p>Registered Nonprofit · Tax ID: 00-0000000</p>
+  </div>
+</footer>
+
+<script>
+  /* ─── NAV SCROLL ─── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ─── HAMBURGER ─── */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  /* ─── FADE IN ON SCROLL ─── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ─── COUNTER ANIMATION ─── */
+  function animateCounter(el, target) {
+    let start = 0;
+    const duration = 2000;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(ease * target);
+      el.textContent = current.toLocaleString() + (target >= 1000 ? '' : '');
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString() + (target === 12000 ? '+' : target === 47 ? '' : target === 28 ? '' : '');
+    };
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target.querySelector('.stat-num');
+        const target = parseInt(el.dataset.target);
+        animateCounter(el, target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-item').forEach(el => counterObserver.observe(el));
+
+  /* ─── DONATE AMOUNTS ─── */
+  function setAmount(btn) {
+    document.querySelectorAll('.donate-amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  /* ─── NEWSLETTER ─── */
+  function subscribeNewsletter(btn) {
+    const input = btn.previousElementSibling;
+    if (!input.value || !input.value.includes('@')) {
+      input.style.borderColor = 'var(--crimson)';
+      input.placeholder = 'Please enter a valid email';
+      setTimeout(() => {
+        input.style.borderColor = '';
+        input.placeholder = 'Your email address';
+      }, 2000);
+      return;
+    }
+    btn.textContent = '✓ Subscribed!';
+    btn.style.background = '#2d9e58';
+    input.value = '';
+    setTimeout(() => {
+      btn.textContent = 'Subscribe';
+      btn.style.background = '';
+    }, 3000);
+  }
+
+  /* ─── SMOOTH SCROLL OFFSET ─── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 75;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
